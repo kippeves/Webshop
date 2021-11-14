@@ -5,11 +5,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\img\610PV2RqtZL._AC_SL1068_.jpg" />
+    <Content Remove="wwwroot\img\61Cn6bISArL._AC_SL1500_.jpg" />
+    <Content Remove="wwwroot\img\61FnG+HuldL._AC_SL1003_.jpg" />
+    <Content Remove="wwwroot\img\61zdQQORNML._AC._SR360,460.jpg" />
+    <Content Remove="wwwroot\img\71mz0tKSthL._AC_SL1500_.jpg" />
     <Content Remove="wwwroot\img\81OLqPX0QyL._AC_SY450_.jpg" />
     <Content Remove="wwwroot\img\the_rock.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\img\610PV2RqtZL._AC_SL1068_.jpg" />
+    <None Include="wwwroot\img\61Cn6bISArL._AC_SL1500_.jpg" />
+    <None Include="wwwroot\img\61FnG+HuldL._AC_SL1003_.jpg" />
+    <None Include="wwwroot\img\61zdQQORNML._AC._SR360,460.jpg" />
+    <None Include="wwwroot\img\71mz0tKSthL._AC_SL1500_.jpg" />
     <None Include="wwwroot\img\81OLqPX0QyL._AC_SY450_.jpg" />
     <None Include="wwwroot\img\the_rock.jpg" />
   </ItemGroup>

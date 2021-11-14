@@ -2,20 +2,21 @@
 @model Webshop.UI.Pages.Product.IndexModel
 @{
 }
-<div class="card-columns">
-    @foreach (var product in Model.products)
-    {
-        <div class="card" style="width: 20rem;">
+    <div class="d-lg-flex justify-content-center">
+        @foreach (var product in Model.products)
+        {
+        <div class="card" style="min-width:18rem; max-width:18rem">
+            <img src="@product.Image" class="card-img-top p-4" alt="...">
             <div class="card-body">
-                <img src="@product.Image" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@product.Name</h5>
-                    <p class="card-text">@product.Desc</p>
-                    <p class="card-text">@product.Price</p>
-                    <a asp-page="/Cart/Index" asp-route-Id="@product.Id" asp-page-handler="Add" class="btn btn-primary">Lägg till i varukorg</a>
-                </div>
+                <h5 class="card-title">@product.Name</h5>
+                <p class="card-text">@product.Desc</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@product.Price.ToString("N") kr</li>
+            </ul>
+            <div class="card-footer">
+                <a asp-page="/Cart/Index" asp-route-Id="@product.Id" asp-page-handler="Add" class="btn btn-primary">Lägg till i varukorg</a>
             </div>
         </div>
-
-    }
-</div>
+        }
+    </div>

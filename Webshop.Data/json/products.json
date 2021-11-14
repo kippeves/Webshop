@@ -1,53 +1,52 @@
-  [
-    {
-      "id":  0,
-      "name": "Tonka Truck",
-      "desc": "A tiny yellow truck with stripes. With a loading area on the back.",
-      "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg",
-      "price": 250
-    },
-    {
-      "id": 1,
-      "name": "The Rock",
-      "desc": "Movie with Nicholas Cage. Pretty good, but nothing to hanging in the christmas tree.",
-      "image_url": "img\\the_rock.jpg ",
-      "price": 200
-    },
-    {
-      "id": 2,
-      "name": "Tonka Truck",
-      "desc": "A tiny truck, yellow and red with stripes. With a loading area on the back.",
-      "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg",
-      "price": 150
-    },
-    {
-      "id": "3",
-      "name": "Tonka Truck",
-      "desc": "A tiny truck, yellow and red with stripes. With a loading area on the back.",
-      "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg",
-      "price": 50
+[
+  {
+    "id": 0,
+    "name": "2021 Apple iPad (10,2-tums med Wi‑Fi, 64 GB) - rymdgrå",
+    "desc": "Fantastisk 10,2-tums Retina-skärm med True Tone.",
+    "image_url": "img\\61zdQQORNML._AC._SR360,460.jpg",
+    "price": 3949
+  },
+  {
+    "id": 1,
+    "name": "The Rock",
+    "desc": "Movie with Nicholas Cage. Pretty good, but nothing to hanging in the christmas tree.",
+    "image_url": "img\\the_rock.jpg",
+    "price": 199
+  },
+  {
+    "id": 2,
+    "name": "Philips Essential Airfryer med Rapid Air-teknik",
+    "desc": "Hälsosam luftfritering med Rapid Air-teknik",
+    "image_url": "img\\71mz0tKSthL._AC_SL1500_.jpg",
+    "price": 1089
+  },
+  {
+    "id": "3",
+    "name": "Tonka Truck",
+    "desc": "A tiny truck, yellow and red with stripes. With a loading area on the back.",
+    "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg",
+    "price": 450
+  },
+  {
+    "id": "4",
+    "name": "IKRA 70300420 elektrisk jordfräs kultivator IEM 800S",
+    "desc": "Perfekt för att lossa marken och för utsädesförberedning/16 stabila och robusta knivar på 4 hackstjärnor,",
+    "image_url": "img\\61Cn6bISArL._AC_SL1500_.jpg",
+    "price": 1054.28
 
-    },
-    {
-      "id": "4",
-      "name": "Tonka Truck",
-      "desc": "A tiny truck, yellow and red with stripes. With a loading area on the back.",
-      "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg",
-      "price": 450
-
-    },
-    {
-      "id": "5",
-      "name": "Tonka Truck",
-      "desc": "A tiny truck, yellow and red with stripes. With a loading area on the back.",
-      "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg",
-      "price": 1000
-
-    },
-    {
-      "id": "6",
-      "name": "Tonka Truck",
-      "desc": "A tiny truck, yellow and red with stripes. With a loading area on the back.",
-      "image_url": "img\\81OLqPX0QyL._AC_SY450_.jpg"
-    }
-  ]
+  },
+  {
+    "id": "5",
+    "name": "Massagepistol, muskelmassage handhållen slagverksmassage 22 hastigheter med LCD-pekskärm",
+    "desc": "8 massagehuvuden och 22 hastighetsintensiteter】 Massagestaven är utrustad med 8 olika formade massagehuvuden för att hjälpa användaren att slappna av olika kroppsdelar. Den kan köras under lång tid och har 22 justerbara vibrationshastighetslägen, du kan justera frekvensen enligt de olika delarna av massagen. Utrustad med minnesfunktion.",
+    "image_url": "img\\610PV2RqtZL._AC_SL1068_.jpg",
+    "price": 369.89
+  },
+  {
+    "id": "6",
+    "name": "Milisten balettskor helsula yogaskor dansskor för kvinnor",
+    "desc": "Professionell halkfri suldesign ger bra skydd för dina fötter, slappna av fötterna för en lång tids dans.",
+    "image_url": "img\\balett.jpg",
+    "price": 152
+  }
+]
