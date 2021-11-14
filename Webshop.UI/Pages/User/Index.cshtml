@@ -1,0 +1,13 @@
+﻿@page
+@model Webshop.UI.Pages.User.IndexModel
+@{
+}
+
+<h1>The current users are:
+</h1>
+<ul>
+@foreach (var customer in Model.customers)
+	{
+		 <li>@customer.Name</li>
+	}
+	</ul>
