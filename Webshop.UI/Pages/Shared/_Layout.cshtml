@@ -10,8 +10,18 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">@ViewData["Title"]</a>
+                <form asp-page="/User/Index" asp-page-handler="Set" class="form-inline mr-3" method="POST">
+                        <select style="padding:10px;" name="id" id="id" onchange="this.form.submit()">
+E                            <option>Välj Kund</option>
+                            <option value="0">John</option>
+                            <option value="1">Eric</option>
+                            <option value="2">Lindsay</option>
+                            <option value="3">Rebecca</option>
+                            <option value="4">Kristian</option>
+                        </select>
+                </form>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -25,7 +35,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/User/Index">Användare</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Product/Index">Produkter</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index">Kundvagn</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">

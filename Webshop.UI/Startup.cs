@@ -38,6 +38,12 @@ namespace Webshop.UI
                 .AddSingleton<IDataAccess<ProductDTO>, DAL_Product>()
                 .AddSingleton<IDataSource<ReceiptDTO>, Source_Receipt>()
                 .AddSingleton<IDataAccess<ReceiptDTO>, DAL_Receipt>()
+                .AddSession(options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.IsEssential = true;
+                })
+                .AddDistributedMemoryCache()
                 .AddRazorPages();
         }
 
@@ -57,7 +63,7 @@ namespace Webshop.UI
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

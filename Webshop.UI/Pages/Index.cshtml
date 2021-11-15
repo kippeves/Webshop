@@ -1,10 +1,23 @@
 ﻿@page
-@model IndexModel
+@model Webshop.UI.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="d-lg-flex justify-content-center">
+        @foreach (var product in Model.products)
+        {
+        <div class="card m-1" style="min-width:18rem; max-width:18rem">
+            <img src="@product.Image" class="card-img-top p-4" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@product.Name</h5>
+                <p class="card-text">@product.Desc</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@product.Price.ToString("N") kr</li>
+            </ul>
+            <div class="card-footer">
+                <a asp-page="/Cart/Index" asp-route-id="@product.Id" asp-page-handler="Add" class="btn btn-primary">Lägg till i varukorg</a>
+            </div>
+        </div>
+        }
+    </div>

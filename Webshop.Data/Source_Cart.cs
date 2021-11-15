@@ -25,17 +25,24 @@ namespace Webshop.DataSource
         public CartDTO LoadById(int i)
         {
             string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<CartDTO>>(json).Single(c=>c.id == i);
+            return JsonConvert.DeserializeObject<IEnumerable<CartDTO>>(json).SingleOrDefault(c=>c.id == i);
         }
 
         public void Save(CartDTO _object)
         {
-            throw new NotImplementedException();
+            string json = File.ReadAllText(path);
+            List<CartDTO> carts = LoadAll().ToList();
+            carts.Add(_object);
+            File.WriteAllText(path,JsonConvert.SerializeObject(carts));
         }
 
         public CartDTO Update(CartDTO _object)
         {
-            throw new NotImplementedException();
+            List<CartDTO> carts = LoadAll().ToList();
+            carts.RemoveAll(c => c.id == _object.id);
+            carts.Add(_object);
+            File.WriteAllText(path, JsonConvert.SerializeObject(carts));
+            return _object;
         }
     }
 }

@@ -30,12 +30,13 @@ namespace Webshop.DAL
  
         public void Save(CartDTO obj)
         {
-            throw new NotImplementedException();
+            _dataSource.Save(obj);
         }
 
         public bool Update(CartDTO obj)
         {
-            throw new NotImplementedException();
+            _dataSource.Update(obj);
+            return true;
         }
     }
 }
