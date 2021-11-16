@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,9 +10,13 @@ namespace Webshop.DTO
 {
     public class ReceiptDTO
     {
-        public int id { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("card_id")]
         public int CardId { get; set; }
+        [JsonProperty("order_id")]
         public int OrderId { get; set; }
-        public DateTime date_paid { get; set; }
+        [JsonProperty("payment_date")]
+        public DateTime Date_paid { get; set; }
     }
 }

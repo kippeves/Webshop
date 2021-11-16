@@ -1,8 +1,7 @@
 ﻿@page
 @model Webshop.UI.Pages.User.IndexModel
 @{
-
+    Layout = "_User";
  }
 
-<h1>Hi, @Model.currentCustomer.Name!
-</h1>
+<h1>Hi, @Model.SessionInfo_Customer.Name!</h1>

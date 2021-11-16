@@ -26,7 +26,7 @@ namespace Webshop.DataSource
         public ReceiptDTO LoadById(int i)
         {
             string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<ReceiptDTO>>(json).Single(r => r.id == i);
+            return JsonConvert.DeserializeObject<IEnumerable<ReceiptDTO>>(json).Single(r => r.Id == i);
         }
 
         public void Save(ReceiptDTO _object)

@@ -5,7 +5,7 @@ using Webshop.DTO;
 
 namespace Webshop.DAL
 {
-   public class DAL_Cart : IDataAccess<CartDTO>
+   public class DAL_Cart
     {
         readonly IDataSource<CartDTO> _dataSource;
         public DAL_Cart(IDataSource<CartDTO> dataSource)

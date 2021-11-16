@@ -8,7 +8,7 @@ using Webshop.DTO;
 
 namespace Webshop.DAL
 {
-    public class DAL_Card : IDataAccess<CardDTO>
+    public class DAL_Card
     {
         readonly IDataSource<CardDTO> _dataSource;
         public DAL_Card(IDataSource<CardDTO> dataSource)
@@ -16,29 +16,8 @@ namespace Webshop.DAL
             _dataSource = dataSource;
         }
 
-        public CardDTO LoadById(int id)
-        {
-            return _dataSource.LoadById(id);
-        }
-
-        public void Delete(CardDTO obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CardDTO> LoadAll()
-        {
-            return _dataSource.LoadAll();
-        }
-
-        public void Save(CardDTO obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(CardDTO obj)
-        {
-            throw new NotImplementedException();
+        public IEnumerable<CardDTO> FindByCustomer(int id) {
+            return _dataSource.LoadAll().Where(c => c.CustomerID == id);
         }
     }
 }

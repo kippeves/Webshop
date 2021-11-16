@@ -1,12 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Newtonsoft.Json;
 
 namespace Webshop.DTO
 {
     public class CardDTO
     {
-        public int CustomerRefID { get; set; }
-        public int NameOnCard { get; set; }
-        public int CardNo { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("customer")]
+        public int CustomerID { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("cardno")]
+        public long Number { get; set; }
+        [JsonProperty("cvs")]
         public int CVS { get; set; }
     }
 }

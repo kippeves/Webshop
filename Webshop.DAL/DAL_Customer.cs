@@ -8,7 +8,7 @@ using Webshop.DTO;
 
 namespace Webshop.DAL
 {
-    public class DAL_Customer : IDataAccess<CustomerDTO>
+    public class DAL_Customer
     {
         readonly IDataSource<CustomerDTO> _dataSource;
         public DAL_Customer(IDataSource<CustomerDTO> dataSource)
@@ -29,11 +29,6 @@ namespace Webshop.DAL
         public IEnumerable<CustomerDTO> LoadAll()
         {
             return _dataSource.LoadAll();
-        }
-
-        public void Save(CustomerDTO obj)
-        {
-            throw new NotImplementedException();
         }
 
         public bool Update(CustomerDTO obj)

@@ -15,9 +15,12 @@
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">@product.Price.ToString("N") kr</li>
             </ul>
-            <div class="card-footer">
-                <a asp-page="/Cart/Index" asp-route-id="@product.Id" asp-page-handler="Add" class="btn btn-primary">Lägg till i varukorg</a>
-            </div>
+            @if (default != Model.SessionInfo_Customer)
+            {
+                <div class="card-footer">
+                    <a asp-page="/User/Cart" asp-route-id="@product.Id" asp-page-handler="Add" class="btn btn-primary">Lägg till i varukorg</a>
+                </div>
+            }
         </div>
         }
     </div>

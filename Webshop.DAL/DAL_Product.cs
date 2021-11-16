@@ -8,7 +8,7 @@ using Webshop.DTO;
 
 namespace Webshop.DAL
 {
-    public class DAL_Product : IDataAccess<ProductDTO>
+    public class DAL_Product
     {
         readonly IDataSource<ProductDTO> _dataSource;
         public DAL_Product(IDataSource<ProductDTO> dataSource)

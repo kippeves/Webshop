@@ -11,10 +11,13 @@ namespace Webshop.UI.Pages
 {
     public class IndexModel : PageModel
     {
-        readonly IDataAccess<ProductDTO> _dataAccess;
-        public List<ProductDTO> products;
+        readonly   DAL_Product _dataAccess;
+        public     List<ProductDTO> products;
+        public CustomerDTO SessionInfo_Customer { get; private set; }
+        public const string SessionKeyCustomer = "_Customer";
 
-        public IndexModel(IDataAccess<ProductDTO> dataAccess)
+
+        public IndexModel(DAL_Product dataAccess)
         {
             _dataAccess = dataAccess;
             products= _dataAccess.LoadAll().ToList();
@@ -22,6 +25,7 @@ namespace Webshop.UI.Pages
 
         public void OnGet()
         {
+            SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
         }
     }
 }

@@ -11,7 +11,15 @@ namespace Webshop.DTO
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
-        public int CartId { get; set; }
+        public Dictionary<int,int> Content{ get; set; }
         public bool Is_paid { get; set; }
+
+        public OrderDTO(int id, int customer, Dictionary<int,int> content)
+        {
+            Id = id;
+            CustomerId = customer;
+            Content = content;
+            Is_paid = false;
+        }
     }
 }

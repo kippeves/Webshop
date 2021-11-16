@@ -24,7 +24,7 @@ namespace Webshop.DataSource
         public CardDTO LoadById(int i)
         {
             string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<CardDTO>>(json).Single(c=>c.CustomerRefID==i);
+            return JsonConvert.DeserializeObject<IEnumerable<CardDTO>>(json).Single(c=>c.CustomerID==i);
         }
 
         public void Save(CardDTO _object)

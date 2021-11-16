@@ -1,0 +1,19 @@
+﻿@page
+@model Webshop.UI.Pages.User.CardModel
+@{
+    Layout = "_User";
+}
+
+@foreach (var card  in Model.Cards)
+{
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@card.Name.</h5>
+                <p class="card-text">@card.Number</p>
+            </div>
+        </div>
+    </div>
+</div>
+}

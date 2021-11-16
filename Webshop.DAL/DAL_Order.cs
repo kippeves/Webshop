@@ -5,7 +5,7 @@ using Webshop.DTO;
 
 namespace Webshop.DAL
 {
-    public class DAL_Order : IDataAccess<OrderDTO>
+    public class DAL_Order
     {
         readonly IDataSource<OrderDTO> _dataSource;
         public DAL_Order(IDataSource<OrderDTO> dataSource)

@@ -27,17 +27,17 @@ namespace Webshop.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IDataSource<CardDTO>, Source_Card>()
-                .AddSingleton<IDataAccess<CardDTO>, DAL_Card>()
                 .AddSingleton<IDataSource<CartDTO>, Source_Cart>()
-                .AddSingleton<IDataAccess<CartDTO>, DAL_Cart>()
                 .AddSingleton<IDataSource<CustomerDTO>, Source_Customer>()
-                .AddSingleton<IDataAccess<CustomerDTO>, DAL_Customer>()
                 .AddSingleton<IDataSource<OrderDTO>, Source_Order>()
-                .AddSingleton<IDataAccess<OrderDTO>, DAL_Order>()
                 .AddSingleton<IDataSource<ProductDTO>, Source_Product>()
-                .AddSingleton<IDataAccess<ProductDTO>, DAL_Product>()
                 .AddSingleton<IDataSource<ReceiptDTO>, Source_Receipt>()
-                .AddSingleton<IDataAccess<ReceiptDTO>, DAL_Receipt>()
+                .AddSingleton<DAL_Customer>()
+                .AddSingleton<DAL_Card>()
+                .AddSingleton<DAL_Cart>()
+                .AddSingleton<DAL_Order>()
+                .AddSingleton<DAL_Product>()
+                .AddSingleton<DAL_Receipt>()
                 .AddSession(options =>
                 {
                     options.Cookie.HttpOnly = true;

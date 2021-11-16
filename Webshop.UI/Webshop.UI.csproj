@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Webshop.DTO\Webshop.DTO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Cart\" />
+  </ItemGroup>
+
 </Project>

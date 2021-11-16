@@ -9,17 +9,13 @@ namespace Webshop.UI.Pages.User
 {
     public class IndexModel : PageModel
     {
-        [ViewData]
-        public string Title { get; set; }
-        readonly IDataAccess<CustomerDTO> _Customers;
+        readonly DAL_Customer _customerAccess;
         public const string SessionKeyCustomer = "_Customer";
-        public CustomerDTO SessionInfo_Customer { get; private set;}
-        public CustomerDTO currentCustomer { get; set; }
+        public CustomerDTO SessionInfo_Customer { get; private set; }
 
-        public IndexModel(IDataAccess<CustomerDTO> Customers)
+        public IndexModel(DAL_Customer _customerAccess)
         {
-            _Customers = Customers;
-            Title = "Index";
+            this._customerAccess = _customerAccess;
         }
 
         public ActionResult OnGet()
@@ -29,14 +25,14 @@ namespace Webshop.UI.Pages.User
                 return RedirectToPage("/Index");
             }
             else {
-                currentCustomer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+                SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
                 return Page();
             }
         }
 
         public ActionResult OnPostSet(int id) {
-            HttpContext.Session.Set<CustomerDTO>(SessionKeyCustomer, _Customers.LoadById(id));
-            return RedirectToPage("/User/Index");
+            HttpContext.Session.Set<CustomerDTO>(SessionKeyCustomer, _customerAccess.LoadById(id));
+            return RedirectToPage("/User/Cart");
         }
     }
 }

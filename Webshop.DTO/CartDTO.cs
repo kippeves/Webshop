@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Data;
 
 namespace Webshop.DTO
 {
@@ -8,12 +7,14 @@ namespace Webshop.DTO
     {
         public CartDTO(int customer)
         {
-            id = customer;
-            products = new Dictionary<int,int>();
+            Id = customer;
+            Products = new Dictionary<int,int>();
         }
 
         //The user that owns the cart
-        public int id { get; set; }        
-        public IDictionary<int,int> products { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
+        [JsonProperty("products")]
+        public IDictionary<int,int> Products { get; set; }
     }
 }
