@@ -16,12 +16,10 @@ namespace Webshop.DAL
         {
             return _dataSource.LoadAll().SingleOrDefault(order => order.Id == id);
         }
-        /*
-        public OrderDTO LoadByKey(int customer, int cart)
+        public OrderDTO LoadByKey(int id, int customer)
         {
-            return _dataSource.LoadAll().Single(o => (o.CustomerId == customer) && (o.CartId == cart));
+            return _dataSource.LoadAll().Single(o => (o.CustomerId == customer) && (o.Id == id));
         }
-        */
 
         public IEnumerable<OrderDTO> LoadAll()
         {
@@ -39,7 +37,7 @@ namespace Webshop.DAL
             var CustomerOrders = LoadByCustomer(c.Id);
 
             var OrderRepo = _dataSource.LoadAll().ToList();
-            OrderDTO newOrder = new OrderDTO(CustomerOrders.Count(), c.Id, new Dictionary<int, int>(cart.Products));
+            OrderDTO newOrder = new(CustomerOrders.Count(), c.Id, new Dictionary<int, int>(cart.Products));
             OrderRepo.Add(newOrder);
             _dataSource.Update(OrderRepo);
             return newOrder.Id;
@@ -53,12 +51,13 @@ namespace Webshop.DAL
             _dataSource.Update(OrderRepo);
         }
 
-        public void Pay(int customer, int order) {
+        public void Pay(int order,int customer) {
             var OrderRepo = _dataSource.LoadAll().ToList();
             OrderDTO SelectOrder = OrderRepo.SingleOrDefault(o => o.CustomerId == customer && o.Id == order);
             if (SelectOrder != default) {
                 SelectOrder.Is_paid = true;
             }
+            Update(SelectOrder);
         }
 
     }

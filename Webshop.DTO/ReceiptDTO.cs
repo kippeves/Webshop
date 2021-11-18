@@ -10,6 +10,13 @@ namespace Webshop.DTO
 {
     public class ReceiptDTO
     {
+        public ReceiptDTO(int card, int order)
+        {
+            CardId = card;
+            OrderId = order;
+            Date_paid = DateTime.Now;
+        }
+
         [JsonProperty("card_id")]
         public int CardId { get; set; }
         [JsonProperty("order_id")]

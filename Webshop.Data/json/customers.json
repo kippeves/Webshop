@@ -2,26 +2,26 @@
 		{
 			"id": 0,
 			"name": "John",
-			"key": "ds8fs8df093"
+			"hash": "a8cfcd74832004951b4408cdb0a5dbcd8c7e52d43f7fe244bf720582e05241da"
 		},
 		{
 			"id": 1,
 			"name": "Eric",
-			"key": "f8093as930fw"
+			"hash": "4cb39c1bdf5da40bb629d3fb041a2af0c9d388370c9e5ea5369f01aa23b02589"
 		},
 		{
 			"id": 2,
 			"name": "Lindsay",
-			"key": "jr3kjl2j3lk2"
+			"hash": "7109d8f136e85769be75b14e3f05bb3adf6671be072bf43539a0a7e03e21cea4"
 		},
 		{
 			"id": 3,
 			"name": "Rebecca",
-			"key": "90f89f0wfssfa"
+			"hash": "5c607f66c4a21215bdddbedde8eb8e3f939f9dcfc6e210c6dda2514d52d36103"
 		},
 		{
 			"id": 4,
 			"name": "Kristian",
-			"key": "f89sef309f80w"
+			"hash": "5ebb5d03d184b1b825cd924b73cf1900dfe033c80d5ee5101f5c8b71fa17de41"
 		}
 	]

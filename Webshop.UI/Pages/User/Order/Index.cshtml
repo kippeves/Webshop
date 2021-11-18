@@ -1,0 +1,56 @@
+﻿@page
+@model Webshop.UI.Pages.User.Order.IndexModel
+@{
+    Layout = "_Content";
+}
+<h2>Orderhistorik</h2>
+@foreach (var Order in @Model.ProductsPerOrder)
+{
+    double sum = 0;
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Namn</th>
+                <th scope="col">Antal</th>
+                <th scope="col">á Pris</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var OrderRow in Order.Value)
+            {
+                <tr>
+                    <td>@OrderRow.Key.Name</td>
+                    <td>@OrderRow.Value</td>
+                    <td>@OrderRow.Key.Price</td>
+                    <td>@((OrderRow.Key.Price * OrderRow.Value).ToString("N")) kr</td>
+                    @{sum += OrderRow.Key.Price * OrderRow.Value;}
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col" />
+                <th scope="col" />
+                <th scope="col">Totalt:</th>
+                <th scope="col">@sum.ToString("N")</th>
+            </tr>
+            <tr>
+                <th scope="col" />
+                <th scope="col" />
+                <th scope="col">Betald:</th>
+                @if (Order.Key.Is_paid == true)
+                {
+                    <th>Betalad!</th>
+                }
+                else
+                {   
+            <th>
+                <a asp-page="/User/Order/Make" asp-route-id="@Order.Key.Id" class="btn text-white btn-danger">Betala!</a>
+            </th>
+                }
+            </tr>
+        </tfoot>
+    </table>
+
+    }

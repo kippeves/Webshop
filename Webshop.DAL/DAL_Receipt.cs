@@ -28,7 +28,9 @@ namespace Webshop.DAL
 
         public void Save(ReceiptDTO obj)
         {
-            throw new NotImplementedException();
+            var _recipes = _dataSource.LoadAll().ToList();
+            _recipes.Add(obj);
+            _dataSource.Update(_recipes);
         }
 
         public bool Update(ReceiptDTO obj)

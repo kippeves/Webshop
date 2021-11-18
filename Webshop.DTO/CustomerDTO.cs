@@ -9,7 +9,9 @@ namespace Webshop.DTO
        public int Id { get; set; }
        [JsonProperty("name")]
        public string Name { get; set; }
-       [JsonProperty("key")]
-       public string Key { get;set; }
+       [JsonProperty("hash")]
+       public string Hash { get;set; }
+       [JsonProperty("salt")]
+       public string Salt { get; set; }
     }
 }
