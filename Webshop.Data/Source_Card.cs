@@ -7,34 +7,10 @@ using Webshop.DTO;
 
 namespace Webshop.DataSource
 {
-    public class Source_Card : IDataSource<CardDTO>
+    public class Source_Card : DataSource_JSON<CardDTO>
     {
-        readonly string path = @"C:\Users\kippe\source\repos\Webshop\Webshop.Data\json\cards.json";
-        public bool Delete(CardDTO _object)
-        {
-            throw new NotImplementedException();
-        }
+        private static string _PATH = AppDomain.CurrentDomain.BaseDirectory + "cards.json";
 
-        public IEnumerable<CardDTO> LoadAll()
-        {
-            string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<CardDTO>>(json);
-        }
-
-        public CardDTO LoadById(int i)
-        {
-            string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<CardDTO>>(json).Single(c=>c.CustomerID==i);
-        }
-
-        public void Save(CardDTO _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public CardDTO Update(CardDTO _object)
-        {
-            throw new NotImplementedException();
-        }
+        public Source_Card() : base(_PATH){ }
     }
 }

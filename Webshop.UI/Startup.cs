@@ -26,17 +26,18 @@ namespace Webshop.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDataSource<CardDTO>, Source_Card>()
-                .AddSingleton<IDataSource<CartDTO>, Source_Cart>()
-                .AddSingleton<IDataSource<CustomerDTO>, Source_Customer>()
-                .AddSingleton<IDataSource<OrderDTO>, Source_Order>()
-                .AddSingleton<IDataSource<ProductDTO>, Source_Product>()
-                .AddSingleton<IDataSource<ReceiptDTO>, Source_Receipt>()
-                .AddSingleton<DAL_Customer>()
+            services
+                .AddSingleton<DataSource_JSON<CardDTO>>()
                 .AddSingleton<DAL_Card>()
+                .AddSingleton<DataSource_JSON<CartDTO>>()
                 .AddSingleton<DAL_Cart>()
+                .AddSingleton<DataSource_JSON<CustomerDTO>>()
+                .AddSingleton<DAL_Customer>()
+                .AddSingleton<DataSource_JSON<OrderDTO>>()
                 .AddSingleton<DAL_Order>()
+                .AddSingleton<DataSource_JSON<ProductDTO>>()
                 .AddSingleton<DAL_Product>()
+                .AddSingleton<DataSource_JSON<ReceiptDTO>>()
                 .AddSingleton<DAL_Receipt>()
                 .AddSession(options =>
                 {

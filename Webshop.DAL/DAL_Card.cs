@@ -10,8 +10,8 @@ namespace Webshop.DAL
 {
     public class DAL_Card
     {
-        readonly IDataSource<CardDTO> _dataSource;
-        public DAL_Card(IDataSource<CardDTO> dataSource)
+        readonly DataSource_JSON<CardDTO> _dataSource;
+        public DAL_Card(DataSource_JSON<CardDTO> dataSource)
         {
             _dataSource = dataSource;
         }

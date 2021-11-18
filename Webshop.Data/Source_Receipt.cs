@@ -9,34 +9,12 @@ using Webshop.DTO;
 
 namespace Webshop.DataSource
 {
-  public  class Source_Receipt : IDataSource<ReceiptDTO>
+  public class Source_Receipt : DataSource_JSON<ReceiptDTO>
     {
-        readonly string path = @"C:\Users\kippe\source\repos\Webshop\Webshop.Data\json\receipts.json";
-        public bool Delete(ReceiptDTO _object)
-        {
-            throw new NotImplementedException();
-        }
+        private static string _PATH = AppDomain.CurrentDomain.BaseDirectory + "receipts.json";
 
-        public IEnumerable<ReceiptDTO> LoadAll()
+        public Source_Receipt() : base(_PATH)
         {
-            string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<ReceiptDTO>>(json);
-        }
-
-        public ReceiptDTO LoadById(int i)
-        {
-            string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<ReceiptDTO>>(json).Single(r => r.Id == i);
-        }
-
-        public void Save(ReceiptDTO _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ReceiptDTO Update(ReceiptDTO _object)
-        {
-            throw new NotImplementedException();
         }
     }
 }

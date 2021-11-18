@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Source_Card.cs" />
+    <Compile Remove="Source_Cart.cs" />
+    <Compile Remove="Source_Customer.cs" />
+    <Compile Remove="Source_Order.cs" />
+    <Compile Remove="Source_Product.cs" />
+    <Compile Remove="Source_Receipt.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="json\" />
   </ItemGroup>
 
@@ -14,6 +23,27 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Webshop.DTO\Webshop.DTO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="json\cards.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="json\carts.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="json\customers.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="json\orders.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="json\products.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="json\receipts.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>

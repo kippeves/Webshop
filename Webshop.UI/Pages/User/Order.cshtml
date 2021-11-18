@@ -1,5 +1,19 @@
-﻿@page
+﻿@page "{id?}"
 @model Webshop.UI.Pages.User.OrderModel
-@{
-    Layout = "_User";
+@{ 
+    Layout = "_Content";
 }
+    <div class="card-deck">
+        @foreach (var card in Model.Cards)
+        {
+            <div class="card text-center" style="width: 15rem">
+                <div class="card-body">@card.Name</div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="height:3rem;">@card.Number.ToString("#### #### #### ####")</li>
+                    <li class="list-group-item" style="height:3rem;">
+                        <input class="form-check-input ml-0" type="radio" name="cardOptions" id="value{@card.Id}" value="{@card.Id}" />
+                    </li>
+                </ul>
+            </div>
+        }
+    </div>

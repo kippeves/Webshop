@@ -10,8 +10,6 @@ namespace Webshop.DTO
 {
     public class ReceiptDTO
     {
-        [JsonProperty("id")]
-        public int Id { get; set; }
         [JsonProperty("card_id")]
         public int CardId { get; set; }
         [JsonProperty("order_id")]

@@ -1,12 +1,12 @@
 ﻿@page
 @model Webshop.UI.Pages.IndexModel
-@{
-    
+@if (default != Model.SessionInfo_Customer) {
+    @await Html.PartialAsync("_UserMenu")
 }
-    <div class="d-lg-flex justify-content-center">
-        @foreach (var product in Model.products)
-        {
-        <div class="card m-1" style="min-width:18rem; max-width:18rem">
+<div class="d-flex flex-fill flex-wrap w-75 m-auto align-content-center">
+    @foreach (var product in Model.products)
+    {
+        <div class="card m-1" style="min-width:16rem; max-width:16rem">
             <img src="@product.Image" class="card-img-top p-4" alt="...">
             <div class="card-body">
                 <h5 class="card-title">@product.Name</h5>
@@ -22,5 +22,5 @@
                 </div>
             }
         </div>
-        }
-    </div>
+    }
+</div>

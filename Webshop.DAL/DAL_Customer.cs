@@ -10,30 +10,20 @@ namespace Webshop.DAL
 {
     public class DAL_Customer
     {
-        readonly IDataSource<CustomerDTO> _dataSource;
-        public DAL_Customer(IDataSource<CustomerDTO> dataSource)
+        readonly DataSource_JSON<CustomerDTO> _dataSource;
+        public DAL_Customer(DataSource_JSON<CustomerDTO> dataSource)
         {
             _dataSource = dataSource;
         }
 
         public CustomerDTO LoadById(int id)
         {
-            return _dataSource.LoadById(id);
-        }
-
-        public void Delete(CustomerDTO obj)
-        {
-            throw new NotImplementedException();
+            return _dataSource.LoadAll().SingleOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<CustomerDTO> LoadAll()
         {
             return _dataSource.LoadAll();
-        }
-
-        public bool Update(CustomerDTO obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

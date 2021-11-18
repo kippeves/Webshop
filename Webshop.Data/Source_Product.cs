@@ -9,34 +9,12 @@ using Webshop.DTO;
 
 namespace Webshop.DataSource
 {
-   public class Source_Product : IDataSource<ProductDTO>
+   public class Source_Products: DataSource_JSON<ProductDTO>
     {
-        readonly string path = @"C:\Users\kippe\source\repos\Webshop\Webshop.Data\json\products.json";
-        public bool Delete(ProductDTO _object)
-        {
-            throw new NotImplementedException();
-        }
+        private static string _PATH = AppDomain.CurrentDomain.BaseDirectory + "products.json";
 
-        public IEnumerable<ProductDTO> LoadAll()
+        public Source_Products() : base(_PATH)
         {
-            string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<ProductDTO>>(json);
-        }
-
-        public ProductDTO LoadById(int i)
-        {
-            string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<IEnumerable<ProductDTO>>(json).Single(p=>p.Id == i);
-        }
-
-        public void Save(ProductDTO _object)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ProductDTO Update(ProductDTO _object)
-        {
-            throw new NotImplementedException();
         }
     }
 }

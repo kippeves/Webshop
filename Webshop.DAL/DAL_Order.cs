@@ -7,14 +7,14 @@ namespace Webshop.DAL
 {
     public class DAL_Order
     {
-        readonly IDataSource<OrderDTO> _dataSource;
-        public DAL_Order(IDataSource<OrderDTO> dataSource)
+        readonly DataSource_JSON<OrderDTO> _dataSource;
+        public DAL_Order(DataSource_JSON<OrderDTO> dataSource)
         {
             _dataSource = dataSource;
         }
-        public OrderDTO LoadById(int i)
+        public OrderDTO LoadById(int id)
         {
-            return _dataSource.LoadById(i);
+            return _dataSource.LoadAll().SingleOrDefault(order => order.Id == id);
         }
         /*
         public OrderDTO LoadByKey(int customer, int cart)
@@ -22,29 +22,44 @@ namespace Webshop.DAL
             return _dataSource.LoadAll().Single(o => (o.CustomerId == customer) && (o.CartId == cart));
         }
         */
-        public void Delete(OrderDTO obj)
-        {
-            throw new System.NotImplementedException();
-        }
 
         public IEnumerable<OrderDTO> LoadAll()
         {
             return _dataSource.LoadAll();
         }
 
-/*        public IEnumerable<OrderDTO> LoadByCustomer(int CustomerId)
+        public IEnumerable<OrderDTO> LoadByCustomer(int CustomerId)
         {
             return _dataSource.LoadAll(). Where(o => o.CustomerId == CustomerId);
         }
-*/
-        public void Save(OrderDTO obj)
+        
+
+        public int PutOrder(CustomerDTO c, CartDTO cart)
         {
-            throw new System.NotImplementedException();
+            var CustomerOrders = LoadByCustomer(c.Id);
+
+            var OrderRepo = _dataSource.LoadAll().ToList();
+            OrderDTO newOrder = new OrderDTO(CustomerOrders.Count(), c.Id, new Dictionary<int, int>(cart.Products));
+            OrderRepo.Add(newOrder);
+            _dataSource.Update(OrderRepo);
+            return newOrder.Id;
         }
 
-        public bool Update(OrderDTO obj)
+        public void Update(OrderDTO order)
         {
-            throw new System.NotImplementedException();
+            var OrderRepo = _dataSource.LoadAll().ToList();
+            OrderRepo.RemoveAll(temp=>temp.CustomerId == order.CustomerId && temp.Id == order.Id);
+            OrderRepo.Add(order);
+            _dataSource.Update(OrderRepo);
         }
+
+        public void Pay(int customer, int order) {
+            var OrderRepo = _dataSource.LoadAll().ToList();
+            OrderDTO SelectOrder = OrderRepo.SingleOrDefault(o => o.CustomerId == customer && o.Id == order);
+            if (SelectOrder != default) {
+                SelectOrder.Is_paid = true;
+            }
+        }
+
     }
 }

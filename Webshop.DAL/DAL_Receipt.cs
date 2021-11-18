@@ -8,8 +8,8 @@ namespace Webshop.DAL
 {
     public class DAL_Receipt
     {
-        readonly IDataSource<ReceiptDTO>    _dataSource;
-        public DAL_Receipt(IDataSource<ReceiptDTO> dataSource)
+        readonly DataSource_JSON<ReceiptDTO>    _dataSource;
+        public DAL_Receipt(DataSource_JSON<ReceiptDTO> dataSource)
         {
             _dataSource   = dataSource;
         }

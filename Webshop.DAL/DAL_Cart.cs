@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Webshop.DataSource;
 using Webshop.DTO;
 
@@ -7,19 +8,21 @@ namespace Webshop.DAL
 {
    public class DAL_Cart
     {
-        readonly IDataSource<CartDTO> _dataSource;
-        public DAL_Cart(IDataSource<CartDTO> dataSource)
+        readonly DataSource_JSON<CartDTO> _dataSource;
+        public DAL_Cart(DataSource_JSON<CartDTO>  dataSource)
         {
             _dataSource = dataSource;
         }
 
-        public CartDTO LoadById(int CustomerId) {
-            return _dataSource.LoadById(CustomerId);
+        public CartDTO LoadById(int Customer) {
+            return _dataSource.LoadAll().SingleOrDefault(c => c.Id == Customer);
         }
 
         public void Delete(CartDTO obj)
         {
-            throw new NotImplementedException();
+            var AllCustomers = _dataSource.LoadAll().ToList();
+            AllCustomers.RemoveAll(c => c.Id == obj.Id);
+            _dataSource.Update(AllCustomers);
         }
 
         public IEnumerable<CartDTO> LoadAll()
@@ -27,16 +30,19 @@ namespace Webshop.DAL
             return _dataSource.LoadAll();
         }
 
- 
         public void Save(CartDTO obj)
         {
-            _dataSource.Save(obj);
+            var _cartSource = _dataSource.LoadAll().ToList();
+            _cartSource.Add(obj);
+            _dataSource.Update(_cartSource);
         }
 
-        public bool Update(CartDTO obj)
+        public void Update(CartDTO obj)
         {
-            _dataSource.Update(obj);
-            return true;
+            var AllCustomers = _dataSource.LoadAll().ToList();
+            AllCustomers.RemoveAll(c => c.Id == obj.Id);
+            AllCustomers.Add(obj);
+            _dataSource.Update(AllCustomers);
         }
     }
 }

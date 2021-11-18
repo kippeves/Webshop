@@ -16,7 +16,6 @@ namespace Webshop.UI.Pages
         public CustomerDTO SessionInfo_Customer { get; private set; }
         public const string SessionKeyCustomer = "_Customer";
 
-
         public IndexModel(DAL_Product dataAccess)
         {
             _dataAccess = dataAccess;
