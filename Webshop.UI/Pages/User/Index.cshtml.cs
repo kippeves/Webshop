@@ -35,7 +35,7 @@ namespace Webshop.UI.Pages.User
     
         public ActionResult OnPostSet(int id) {
             HttpContext.Session.Set<CustomerDTO>(SessionKeyCustomer, _customerAccess.LoadById(id));
-            return RedirectToPage("/User/Cart");
+            return RedirectToPage("/Index");
         }
     }
 }

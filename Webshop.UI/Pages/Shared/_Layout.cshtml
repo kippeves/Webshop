@@ -6,27 +6,35 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">Webshop</a>
-                <form asp-page="/User/Index" asp-page-handler="Set" class="form-inline ml-3" method="POST">
-                    <select style="padding:10px;" name="id" id="id" onchange="this.form.submit()">
-                        <option>Välj Kund</option>
-                        <option value="0">John</option>
-                        <option value="1">Eric</option>
-                        <option value="2">Lindsay</option>
-                        <option value="3">Rebecca</option>
-                        <option value="4">Kristian</option>
-                    </select>
-                </form>
+                <div class="ml-auto nav">
+                    <form asp-page="/Index" asp-page-handler="Search" method="POST" class="form-inline my-2 my-lg-0 mr-3">
+                        <input class="form-control mr-sm-2" name="term" id="term" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <form asp-page="/User/Index" asp-page-handler="Set" class="form-inline" method="POST">
+                        <select name="id" id="id" class="p-1" onchange="this.form.submit()">
+                            <option>Välj Kund</option>
+                            <option value="0">John</option>
+                            <option value="1">Eric</option>
+                            <option value="2">Lindsay</option>
+                            <option value="3">Rebecca</option>
+                            <option value="4">Kristian</option>
+                        </select>
+                    </form>
+                </div>
             </div>
         </nav>
     </header>
     <div class="container-fluid p-0 m-0">
         <main role="main" class="pb-3">
+            <div id="cart"></div>
             @RenderBody()
         </main>
     </div>
@@ -38,7 +46,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

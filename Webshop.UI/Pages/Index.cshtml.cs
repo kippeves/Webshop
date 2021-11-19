@@ -11,20 +11,32 @@ namespace Webshop.UI.Pages
 {
     public class IndexModel : PageModel
     {
-        readonly   DAL_Product _dataAccess;
+        readonly   DAL_Product _productAccess;
         public     List<ProductDTO> products;
         public CustomerDTO SessionInfo_Customer { get; private set; }
         public const string SessionKeyCustomer = "_Customer";
 
-        public IndexModel(DAL_Product dataAccess)
+        public IndexModel(DAL_Product productAccess)
         {
-            _dataAccess = dataAccess;
-            products= _dataAccess.LoadAll().ToList();
+            _productAccess = productAccess;
         }
 
         public void OnGet()
         {
             SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+            products = _productAccess.LoadAll().ToList();
         }
+
+        public ActionResult OnPostSearch(string term) 
+        {
+            if (!string.IsNullOrEmpty(term))
+            {
+                products = _productAccess.LoadAll().Where(p => p.Name.ToLower().Contains(term.ToLower())).ToList();
+                SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+                return Page();
+            }
+            return RedirectToPage("/Index");
+        }
+
     }
 }
