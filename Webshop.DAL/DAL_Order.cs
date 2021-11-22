@@ -12,10 +12,7 @@ namespace Webshop.DAL
         {
             _dataSource = dataSource;
         }
-        public OrderDTO LoadById(int id)
-        {
-            return _dataSource.LoadAll().SingleOrDefault(order => order.Id == id);
-        }
+
         public OrderDTO LoadByKey(int id, int customer)
         {
             return _dataSource.LoadAll().Single(o => (o.CustomerId == customer) && (o.Id == id));
@@ -35,7 +32,6 @@ namespace Webshop.DAL
         public int PutOrder(CustomerDTO c, CartDTO cart)
         {
             var CustomerOrders = LoadByCustomer(c.Id);
-
             var OrderRepo = _dataSource.LoadAll().ToList();
             OrderDTO newOrder = new(CustomerOrders.Count(), c.Id, new Dictionary<int, int>(cart.Products));
             OrderRepo.Add(newOrder);

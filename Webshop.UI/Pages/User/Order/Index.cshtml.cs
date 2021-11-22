@@ -1,9 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
+using System.Linq;
 using Webshop.DAL;
 using Webshop.DTO;
 
@@ -25,7 +24,7 @@ namespace Webshop.UI.Pages.User.Order
             _productAccess = productAccess;
         }
 
-        public ActionResult OnGet()
+        public IActionResult OnGet()
         {
             if (HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer) == default)
             {
@@ -34,6 +33,7 @@ namespace Webshop.UI.Pages.User.Order
             else
             {
                 SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+                ViewData["username"] = SessionInfo_Customer.Name;
                 OrderPerCustomer = _orderAccess.LoadByCustomer(SessionInfo_Customer.Id).ToList();
                 ProductsPerOrder = new();
                 foreach (var Order in _orderAccess.LoadByCustomer(SessionInfo_Customer.Id))
@@ -47,5 +47,29 @@ namespace Webshop.UI.Pages.User.Order
             }
             return Page();
         }
+
+    public IActionResult OnPostSort(string sortTerm) {
+        if (HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer) == default)
+        {
+            return RedirectToPage("/Index");
+        }
+        else
+        {
+            SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+            if (sortTerm == "asc") { 
+                    OrderPerCustomer = _orderAccess.LoadByCustomer(SessionInfo_Customer.Id).OrderBy(o=>o.Is_paid).ToList();
+            } else OrderPerCustomer = _orderAccess.LoadByCustomer(SessionInfo_Customer.Id).OrderByDescending(o => o.Is_paid).ToList();
+            ProductsPerOrder = new();
+            foreach (var Order in OrderPerCustomer)
+            {
+                ProductsPerOrder[Order] = new();
+                foreach (var OrderRow in Order.Content)
+                {
+                    ProductsPerOrder[Order][_productAccess.LoadById(OrderRow.Key)] = OrderRow.Value;
+                }
+            }
+        }
+        return Page();
     }
+}
 }

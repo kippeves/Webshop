@@ -14,15 +14,15 @@ namespace Webshop.UI.Pages.User
     public class CardModel : PageModel
     {
         readonly DAL_Card _cardAccess;
-        readonly DAL_Receipt _receiptAccess;
+        readonly DAL_Receipt _recieptAccess;
         readonly DAL_Order _orderAccess;
         public const string SessionKeyCustomer = "_Customer";
         public CustomerDTO SessionInfo_Customer { get; private set; }
         public List<CardDTO> Cards { get; set; }
-        public CardModel(DAL_Card cardAccess, DAL_Receipt receiptAccess, DAL_Order orderAccess)
+        public CardModel(DAL_Card cardAccess, DAL_Receipt recieptAccess, DAL_Order orderAccess)
         {
             _cardAccess = cardAccess;
-            _receiptAccess = receiptAccess;
+            _recieptAccess = recieptAccess;
             _orderAccess = orderAccess;
 
         }
@@ -36,6 +36,7 @@ namespace Webshop.UI.Pages.User
         public ActionResult OnGet()
         {
             CustomerDTO SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+            ViewData["username"] = SessionInfo_Customer.Name;
             if (default == SessionInfo_Customer)
             {
                 return RedirectToPage("/Index");
@@ -65,8 +66,7 @@ namespace Webshop.UI.Pages.User
                 if (ComputerHash == SessionInfo_Customer.Hash)
                 {
                     _orderAccess.Pay(OrderId,SessionInfo_Customer.Id);
-                    ReceiptDTO receipt = new (CardId, OrderId);
-                    _receiptAccess.Save(receipt);
+                    _recieptAccess.MakeReceipt(SessionInfo_Customer.Id, OrderId, CardId);
                     return RedirectToPage("/User/Order/Index");
                 }
                 else {

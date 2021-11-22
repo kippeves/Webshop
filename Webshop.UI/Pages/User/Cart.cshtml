@@ -1,16 +1,18 @@
-﻿@page "{handler?}/{id?}"
+﻿@page
 @model Webshop.UI.Pages.User.CartModel
-<div class="container m-3 p-3">
+@{
+    Layout = "";
+}
     @if (Model.Products.Count > 0)
     {
-        <h1>Produkter i varukorg:</h1>
+        <h1>Produkter:</h1>
         <table class="table mt-4">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Namn</th>
-                    <th scope="col">Antal</th>
-                    <th scope="col">á Pris</th>
-                    <th scope="col">Total</th>
+                    <th scope="col" width="40%">Namn</th>
+                    <th scope="col" width="20%">Antal</th>
+                    <th scope="col" width="20%">á Pris</th>
+                    <th scope="col" width="20%">Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,36 +22,30 @@
                     total += (product.Key.Price * product.Value);
                     <tr>
                         <td>@product.Key.Name</td>
-                        <td class="p-2">
-                            <a asp-page="/User/Cart" asp-route-id="@product.Key.Id" asp-page-handler="Remove">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" /></svg>
-                            </a>
-                            @product.Value
-                            <a asp-page="/User/Cart" asp-route-id="@product.Key.Id" asp-page-handler="Add">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" /></svg>
-                            </a>
+                        <td>
+                            <span id="amt@(product.Key.Id)">@product.Value</span>
+
+                            <a id="rem@(product.Key.Id)" class="addremove" asp-page="/User/Cart" asp-route-id="@product.Key.Id" asp-page-handler="Remove"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z" /></svg></a>
+                            <a id="add@(product.Key.Id)" class="addremove" asp-page="/User/Cart" asp-route-id="@product.Key.Id" asp-page-handler="Add"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" /></svg></a>
                         </td>
                         <td>@product.Key.Price</td>
-                        <td>@String.Format("{0:N}", (product.Key.Price * product.Value)) kr</td>
-                    </tr>
+                        <td>@((product.Key.Price * product.Value).ToString("C"))</td>
+  
+                      </tr>
                 }
             <tfoot>
                 <tr>
                     <td></td>
                     <td></td>
-                    <td>Total Kostnad: </td>
+                    <td>Totalt: </td>
                     <td>@total.ToString("N") kr</td>
                 </tr>
             </tfoot>
             </tbody>
         </table>
-
-        <a asp-page="/User/Order/Make" asp-page-handler="Put" asp-route-cart="@Model.UserCart.Id" class="btn btn-outline-secondary btn-lg" role="button">Lägg Order</a>
-
-
+        <a asp-page="/User/Order/Make" asp-page-handler="Put" asp-route-cart="@Model.SessionInfo_Cart.Id" class="btn btn-outline-secondary btn-lg" role="button">Lägg Order</a>
     }
     else
     {
         <h1>Du har inga produkter i din varukorg.</h1>
     }
-</div>

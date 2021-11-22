@@ -13,17 +13,19 @@ namespace Webshop.DAL
         {
             _dataSource   = dataSource;
         }
-        public ReceiptDTO GetByKey(int cardId, int orderId)
+        public IEnumerable<ReceiptDTO> GetByCustomer(int CustomerId)
         {
-            return _dataSource.LoadAll().SingleOrDefault(r => (r.CardId == cardId) && (r.OrderId == orderId));
+            return _dataSource.LoadAll().Where(r => r.CustomerId == CustomerId);
         }
-        public IEnumerable<ReceiptDTO>SearchByCard(int card)
-        {
-            return _dataSource.LoadAll().Where(r => r.CardId == card);
-        }
+
         public IEnumerable<ReceiptDTO> LoadAll()
         {
             return _dataSource.LoadAll();        
+        }
+
+        public void MakeReceipt(int CustomerId, int OrderId, int CardId) {
+            ReceiptDTO receipt = new(CustomerId, OrderId, CardId);
+            Save(receipt);
         }
 
         public void Save(ReceiptDTO obj)

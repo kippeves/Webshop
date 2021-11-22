@@ -21,13 +21,17 @@ namespace Webshop.UI.Pages
             _productAccess = productAccess;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+            if (SessionInfo_Customer != default) { 
+                ViewData["username"] = SessionInfo_Customer.Name;
+            }
             products = _productAccess.LoadAll().ToList();
+            return Page()
         }
 
-        public ActionResult OnPostSearch(string term) 
+        public IActionResult OnPostSearch(string term) 
         {
             if (!string.IsNullOrEmpty(term))
             {
@@ -36,6 +40,10 @@ namespace Webshop.UI.Pages
                 return Page();
             }
             return RedirectToPage("/Index");
+        }
+
+        public IActionResult OnPostSort() { 
+
         }
 
     }

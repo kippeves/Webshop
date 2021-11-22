@@ -16,18 +16,12 @@ namespace Webshop.DataSource
         {
             Dictionary<string, string> _PATHS = new()
             {
-                { "Webshop.DTO.CardDTO",
-                    System.AppDomain.CurrentDomain.BaseDirectory+@"\json\cards.json" },
-                { "Webshop.DTO.CartDTO",
-                    System.AppDomain.CurrentDomain.BaseDirectory+@"\json\carts.json" },
-                { "Webshop.DTO.CustomerDTO",
-                    System.AppDomain.CurrentDomain.BaseDirectory+ @"\json\customers.json" },
-                { "Webshop.DTO.OrderDTO",
-                    System.AppDomain.CurrentDomain.BaseDirectory+ @"\json\orders.json" },
-                { "Webshop.DTO.ProductDTO",
-                    System.AppDomain.CurrentDomain.BaseDirectory+ @"\json\products.json" },
-                { "Webshop.DTO.ReceiptDTO",
-                    System.AppDomain.CurrentDomain.BaseDirectory+ @"\json\receipts.json" }
+                { "Webshop.DTO.CardDTO",        @"C:\Users\kippe\Source\Repos\kippeves\Webshop\Webshop.Data\json\cards.json" },
+                { "Webshop.DTO.CartDTO",        @"C:\Users\kippe\Source\Repos\kippeves\Webshop\Webshop.Data\json\carts.json"},
+                { "Webshop.DTO.CustomerDTO",    @"C:\Users\kippe\Source\Repos\kippeves\Webshop\Webshop.Data\json\customers.json"},
+                { "Webshop.DTO.OrderDTO",       @"C:\Users\kippe\Source\Repos\kippeves\Webshop\Webshop.Data\json\orders.json"},
+                { "Webshop.DTO.ProductDTO",     @"C:\Users\kippe\Source\Repos\kippeves\Webshop\Webshop.Data\json\products.json"},
+                { "Webshop.DTO.ReceiptDTO",     @"C:\Users\kippe\Source\Repos\kippeves\Webshop\Webshop.Data\json\receipts.json"}
             };
             _PATH = _PATHS[typeof(T).ToString()];
         }

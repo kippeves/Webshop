@@ -5,9 +5,9 @@ namespace Webshop.DTO
 {
     public class CartDTO
     {
-        public CartDTO(int customer)
+        public CartDTO(int id)
         {
-            Id = customer;
+            Id = id;
             Products = new Dictionary<int,int>();
         }
 

@@ -13,7 +13,8 @@ namespace Webshop.UI.Pages.User.Order
         readonly DAL_Card _cardAccess;
         readonly DAL_Cart _cartAccess;
         public List<CardDTO> Cards { get; set; }
-        public const string SessionKeyCustomer = "_Customer";
+        public const string SessionKeyCustomer  = "_Customer";
+        public const string SessionKeyCart      = "_Cart";
         public CustomerDTO SessionInfo_Customer { get; private set; }
         public int OrderId {get;set;}
         public string ErrorMessage { get; set; }
@@ -54,6 +55,7 @@ namespace Webshop.UI.Pages.User.Order
                 CartDTO c = _cartAccess.LoadById(cart);
                 int orderNo = _orderAccess.PutOrder(SessionInfo_Customer,c);
                 _cartAccess.Delete(c);
+                HttpContext.Session.Set<CartDTO>(SessionKeyCart, new(SessionInfo_Customer.Id));
                 return RedirectToPage("/User/Order/Index", new { id = orderNo });
             }
         }

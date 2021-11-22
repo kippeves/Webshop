@@ -1,9 +1,19 @@
 ﻿@page
 @model Webshop.UI.Pages.IndexModel
-@if (default != Model.SessionInfo_Customer) {
-    @await Html.PartialAsync("_UserMenu")
+@if (default != Model.SessionInfo_Customer)
+{
+    // @await Html.PartialAsync("_UserMenu")
+    Layout = "/Pages/User/_Layout.cshtml";
 }
-<div class="d-flex flex-fill flex-wrap w-75 m-auto align-content-center">
+else { Layout = "_Layout"; }
+<form asp-page="/Index" asp-page-handler="Sort" method="POST">
+    <select name="sortTerm" id="sortTerm" onchange="this.form.submit()">
+        <option>Sortera enligt:</option>
+        <option value="desc">Högsta Pris</option>
+        <option value="asc">Lägsta pris</option>
+    </select>
+</form>
+<div class="d-flex flex-fill flex-wrap m-auto">
     @foreach (var product in Model.products)
     {
         <div class="card m-1" style="min-width:16rem; max-width:16rem">
@@ -19,7 +29,7 @@
             @if (default != Model.SessionInfo_Customer)
             {
                 <div class="card-footer">
-                    <a asp-page="/User/Cart" asp-route-id="@product.Id" asp-page-handler="Add" class="btn btn-primary">Lägg till i varukorg</a>
+                    <a id="add@(product.Id)" asp-page="/User/Cart" asp-route-id="@product.Id" asp-page-handler="Add" class="addremove btn btn-primary">Lägg till i varukorg</a>
                 </div>
             }
         </div>

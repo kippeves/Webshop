@@ -6,7 +6,6 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-
 </head>
 <body>
     <header>
@@ -33,10 +32,9 @@
         </nav>
     </header>
     <div class="container-fluid p-0 m-0">
-        <main role="main" class="pb-3">
-            <div id="cart"></div>
-            @RenderBody()
-        </main>
+            <main role="main" class="col-sm pb-3">
+                @RenderBody()
+            </main>
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">

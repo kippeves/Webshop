@@ -1,6 +1,7 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using Webshop.DAL;
 using Webshop.DTO;
@@ -12,11 +13,13 @@ namespace Webshop.UI.Pages.User
         readonly DAL_Cart _cartAccess;
         readonly DAL_Product _productAccess;
         readonly DAL_Card _cardAccess;
-        const string SessionKeyCustomer = "_Customer";
+        private const string SessionKeyCustomer = "_Customer";
+        private const string SessionKeyCart = "_Cart";
+
         public CustomerDTO SessionInfo_Customer { get; private set; }
+        public CartDTO SessionInfo_Cart { get; private set; }
         public Dictionary<ProductDTO, int> Products { get; set; }
         public List<CardDTO> Cards { get; set; }
-        public CartDTO UserCart { get; set; }
 
         public CartModel(DAL_Cart cartAccess, DAL_Product productAccess, DAL_Card cardAccess)
         {
@@ -25,83 +28,84 @@ namespace Webshop.UI.Pages.User
             _cardAccess = cardAccess;
         }
 
-        public ActionResult OnGet()
+        public void OnGet()
         {
             SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+            SessionInfo_Cart = HttpContext.Session.Get<CartDTO>(SessionKeyCart);
             Cards = new();
             Products = new();
 
             if (SessionInfo_Customer == default)
             {
-                return RedirectToPage("/Index");
+                RedirectToPage("/Index");
             }
             else {
-                CustomerDTO currentCustomer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
-                UserCart = _cartAccess.LoadById(currentCustomer.Id);
-                if (UserCart != null){
-                    foreach (var item in UserCart.Products)
-                { 
-                    Products.Add(_productAccess.LoadById(item.Key),item.Value);
+                SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+                SessionInfo_Cart = HttpContext.Session.Get<CartDTO>(SessionKeyCart);
+                foreach (var item in SessionInfo_Cart.Products)
+                {
+                    Products.Add(_productAccess.LoadById(item.Key), item.Value);
                 }
-                }
+            }
+        }
+    
 
-                Cards.AddRange(_cardAccess.FindByCustomer(SessionInfo_Customer.Id));
-            }
-                return Page();
-        }
-        public ActionResult OnGetAdd(int id, int amt = 1)
+    public IActionResult OnGetAdd(int id, int amt = 1)
+    {
+        if (HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer) == default)
         {
-            if (HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer) == default)
+            string host = HttpContext.Request.Headers["Referer"];
+            return Redirect(host);
+        }
+        else
+        {
+                SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+                SessionInfo_Cart = HttpContext.Session.Get<CartDTO>(SessionKeyCart);
+                int amount;
+            if (SessionInfo_Cart.Products.ContainsKey(id))
             {
-                return RedirectToPage("/Index");
+                    SessionInfo_Cart.Products[id] += amt;
+                    amount = SessionInfo_Cart.Products[id];
             }
             else
             {
-                CustomerDTO currentCustomer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
-                CartDTO UserCart = _cartAccess.LoadById(currentCustomer.Id);
-                if (default == UserCart)
-                {
-                    UserCart = new CartDTO(currentCustomer.Id);
-                    _cartAccess.Save(UserCart);
+                    SessionInfo_Cart.Products[id] = amt;
+                    amount = SessionInfo_Cart.Products[id];
                 }
-                if (UserCart.Products.ContainsKey(id))
-                {
-                    UserCart.Products[id] += amt;
-                }
-                else
-                {
-                    UserCart.Products[id] = amt;
-                }
-                _cartAccess.Update(UserCart);
-                return RedirectToPage("/User/Cart");
-            }
+            _cartAccess.Update(SessionInfo_Cart);
+            HttpContext.Session.Set<CartDTO>(SessionKeyCart, SessionInfo_Cart);
+                string result = "{ \"amount\" : "+amount+" }";
+                return Content(result, "application/json");
         }
-        public ActionResult OnGetRemove(int id, int amt = 1)
+    }
+
+        public IActionResult OnGetRemove(int id, int amt = 1)
         {
             if (HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer) == default)
             {
-                return RedirectToPage("/Index");
+                string host = HttpContext.Request.Headers["Referer"];
+                return Redirect(host);
             }
             else
             {
-                CustomerDTO currentCustomer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
-                CartDTO UserCart = _cartAccess.LoadById(currentCustomer.Id);
-                if (default == UserCart)
+                SessionInfo_Customer = HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer);
+                SessionInfo_Cart = HttpContext.Session.Get<CartDTO>(SessionKeyCart);
+                int amount = 0;
+                if (SessionInfo_Cart.Products.ContainsKey(id))
                 {
-                    UserCart = new CartDTO(currentCustomer.Id);
-                    _cartAccess.Save(UserCart);
-                }
-                if (UserCart.Products.ContainsKey(id))
-                {
-                    UserCart.Products[id] -= amt;
-                    if (UserCart.Products[id] == 0)
+                    SessionInfo_Cart.Products[id] -= amt;
+                    amount = SessionInfo_Cart.Products[id];                    if (SessionInfo_Cart.Products[id] == 0)
                     {
-                        UserCart.Products.Remove(id);
+                        SessionInfo_Cart.Products.Remove(id);
                     }
+                    _cartAccess.Update(SessionInfo_Cart);
+                    HttpContext.Session.Set<CartDTO>(SessionKeyCart, SessionInfo_Cart);
                 }
-                _cartAccess.Update(UserCart);
-                return RedirectToPage("/User/Cart");
+                _cartAccess.Update(SessionInfo_Cart);
+                HttpContext.Session.Set<CartDTO>(SessionKeyCart, SessionInfo_Cart);
+                string result = "{ \"amount\" : " + amount + " }";
+                return Content(result, "application/json");
+            }
             }
         }
     }
-}

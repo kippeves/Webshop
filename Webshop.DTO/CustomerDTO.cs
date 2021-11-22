@@ -11,7 +11,5 @@ namespace Webshop.DTO
        public string Name { get; set; }
        [JsonProperty("hash")]
        public string Hash { get;set; }
-       [JsonProperty("salt")]
-       public string Salt { get; set; }
     }
 }

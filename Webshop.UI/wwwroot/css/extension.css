@@ -1,0 +1,30 @@
+﻿div.wrapper {
+    display:flex;
+    width:100%;
+    margin:auto;
+}
+.order {
+    width:50%;
+    margin:auto;
+}
+
+#content {
+    padding-top:2em;
+    padding-bottom:5em;
+    margin:auto;
+    width:75%;
+}
+
+div#cart {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    min-width: 550px;
+    max-width: 550px;
+    min-height: 50vh;
+    background: white;
+    padding: 1em;
+    border-bottom-right-radius:10px;
+    border-right: 1px solid rgba(219,223,227,100);
+    border-bottom: 1px solid rgba(219,223,227,100);
+}
