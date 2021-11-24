@@ -4,10 +4,10 @@
 
 # 1. Ändra pathen för JSON-filerna:
 
-Sökvägarna som skall ändras ligger i konstruktorn för ***Webshop.DataSource.DataSource_JSON***. 
+Sökvägarna som skall ändras ligger i konstruktorn för ***Webshop.Data.DataSource_JSON***. 
 Sökvägarna ligger i Dictionary:t _PATHS på rad 18.
 
-Filerna ligger i mappen json under projektet ***Webshop.DataSource***, d.v.s. samma projekt som klassen ligger i. I Solution Explorer ligger de precis ovanför. 
+Filerna ligger i mappen json under projektet ***Webshop.Data***, d.v.s. samma projekt som klassen ligger i. I Solution Explorer ligger de precis ovanför. 
 
 Filerna:
 ```
