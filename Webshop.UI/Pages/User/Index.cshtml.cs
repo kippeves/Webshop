@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Collections.Generic;
-using System.Linq;
 using Webshop.DAL;
 using Webshop.DTO;
 
@@ -22,7 +20,10 @@ namespace Webshop.UI.Pages.User
             _customerAccess = customerAccess;
             _cartAccess     = cartAccess;
         }
-
+        /// <summary>
+        /// Visar information om en kund. Har ingen funktionalitet.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult OnGet()
         {
             if (HttpContext.Session.Get<CustomerDTO>(SessionKeyCustomer) == default)
@@ -37,14 +38,21 @@ namespace Webshop.UI.Pages.User
             }
         }
     
+        /// <summary>
+        /// Loggar in en användare.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult OnPostSet(int id) {
+            // Sätter en kund. Har absolut ingen felhantering, eftersom det är hårdkodat vilka kunder som finns.
+            // Jag hade INTE gjort så här om jag hade haft en inloggningsskärm.
             HttpContext.Session.Set<CustomerDTO>(SessionKeyCustomer, _customerAccess.LoadById(id));
-            CartDTO tempCart = _cartAccess.LoadById(id);
-            if(tempCart == default){
-                tempCart = new CartDTO(id);
+            CartDTO tempCart = _cartAccess.LoadById(id); // Hämtar ut en kunds kundvagn.
+            if(tempCart == default){ // Om inte kunden har någon, så är objektet Default (tekniskt sett samma sak som Null), så kontroll görs på Default. 
+                tempCart = new CartDTO(id); // Skapa en ny kundvagn och lagra den.
                 _cartAccess.Save(tempCart);
             }
-            HttpContext.Session.Set<CartDTO>(SessionKeyCart, tempCart);
+            HttpContext.Session.Set<CartDTO>(SessionKeyCart, tempCart); // Sätt kundvagnen i sessionen.
             return RedirectToPage("/Index");
         }
     }

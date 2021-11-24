@@ -13,10 +13,6 @@ namespace Webshop.DAL
         {
             _dataSource = dataSource;
         }
-        public void Delete(ProductDTO obj)
-        {
-            throw new NotImplementedException();
-        }
 
         public ProductDTO LoadById( int i)
         {
@@ -26,16 +22,6 @@ namespace Webshop.DAL
         public IEnumerable<ProductDTO> LoadAll()
         {
             return _dataSource.LoadAll();
-        }
-
-        public void Save(ProductDTO obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(ProductDTO obj)
-        {
-            throw new NotImplementedException();
         }
     }
 }

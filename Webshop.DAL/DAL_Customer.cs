@@ -20,10 +20,5 @@ namespace Webshop.DAL
         {
             return _dataSource.LoadAll().SingleOrDefault(c => c.Id == id);
         }
-
-        public IEnumerable<CustomerDTO> LoadAll()
-        {
-            return _dataSource.LoadAll();
-        }
     }
 }

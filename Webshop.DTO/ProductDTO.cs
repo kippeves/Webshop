@@ -12,7 +12,6 @@ namespace Webshop.DTO
         public string Desc { get; set; }
         [JsonProperty("image_url")]
         public string Image { get; set; }
-        public int Weight { get; set; }
         [JsonProperty("price")]
         public double Price { get; set; }
     }

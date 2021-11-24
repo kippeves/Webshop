@@ -13,7 +13,7 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" style="height:3rem;">@card.Number.ToString("#### #### #### ####")</li>
                     <li class="list-group-item" style="height:3rem;">
-                        <input class="form-check-input ml-0" type="radio" name="cardId" id="value{@card.Id}" value="@card.Id" required />
+                        <input asp-for="ReceiptModel.CardId" class="form-check-input ml-0" type="radio" name="cardId" id="value{@card.ID}" value="@card.ID" required />
                     </li>
                 </ul>
             </div>
@@ -27,7 +27,8 @@
             <div class="alert alert-danger" role="alert">@TempData["ErrorMessage"]</div>
         }
     </div>
-    <input type="hidden" value="@Model.OrderId" name="OrderId" id="OrderId" />
+    <input asp-for="ReceiptModel.CustomerId" type="hidden" value="@Model.SessionInfo_Customer.Id"/>
+    <input asp-for="ReceiptModel.OrderId" type="hidden" value="@Model.OrderId"/>
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </form>

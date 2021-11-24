@@ -25,11 +25,6 @@ namespace Webshop.DAL
             _dataSource.Update(AllCustomers);
         }
 
-        public IEnumerable<CartDTO> LoadAll()
-        {
-            return _dataSource.LoadAll();
-        }
-
         public void Save(CartDTO obj)
         {
             var _cartSource = _dataSource.LoadAll().ToList();

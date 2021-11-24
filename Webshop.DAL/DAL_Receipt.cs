@@ -18,27 +18,11 @@ namespace Webshop.DAL
             return _dataSource.LoadAll().Where(r => r.CustomerId == CustomerId);
         }
 
-        public IEnumerable<ReceiptDTO> LoadAll()
-        {
-            return _dataSource.LoadAll();        
-        }
-
-        public void MakeReceipt(int CustomerId, int OrderId, int CardId) {
-            ReceiptDTO receipt = new(CustomerId, OrderId, CardId);
-            Save(receipt);
-        }
-
         public void Save(ReceiptDTO obj)
         {
             var _recipes = _dataSource.LoadAll().ToList();
             _recipes.Add(obj);
             _dataSource.Update(_recipes);
         }
-
-        public bool Update(ReceiptDTO obj)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
