@@ -19,6 +19,6 @@ kan tömmas om du vill se hur systemet hanterar tomt material. Om du gör det s�
 
 # 2. Funktionalitet
 
-För att logga in är det bara att välja en användare i DropDown-menyn uppe till höger. Sen är det bara att lägga till hur många produkter du vill.
-Det finns en adresshantering, du väljer bara kort, och skriver in lösenord. Slutligen så ser du kvittot om du väljer Kvitton i användarmenyn.
+För att logga in är det bara att välja en användare i dropdown-menyn uppe till höger. Sen är det bara att lägga till hur många produkter du vill.
+Det finns ingen adresshantering, du väljer bara kort, och skriver in lösenord. Slutligen så ser du kvittot om du väljer Kvitton i användarmenyn.
 
